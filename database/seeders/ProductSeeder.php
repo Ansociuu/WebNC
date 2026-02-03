@@ -38,7 +38,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($categories as $catData) {
-            $category = Category::create($catData);
+            $category = Category::updateOrCreate(
+                ['slug' => $catData['slug']],
+                $catData
+            );
 
             if ($catData['name'] === 'Laptops') {
                 $this->seedLaptops($category->id);
@@ -79,10 +82,12 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create(array_merge($product, [
-                'category_id' => $categoryId,
-                'slug' => Str::slug($product['name']),
-            ]));
+            Product::updateOrCreate(
+                ['slug' => Str::slug($product['name'])],
+                array_merge($product, [
+                    'category_id' => $categoryId,
+                ])
+            );
         }
     }
 
@@ -113,10 +118,12 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create(array_merge($product, [
-                'category_id' => $categoryId,
-                'slug' => Str::slug($product['name']),
-            ]));
+            Product::updateOrCreate(
+                ['slug' => Str::slug($product['name'])],
+                array_merge($product, [
+                    'category_id' => $categoryId,
+                ])
+            );
         }
     }
 
@@ -140,10 +147,12 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create(array_merge($product, [
-                'category_id' => $categoryId,
-                'slug' => Str::slug($product['name']),
-            ]));
+            Product::updateOrCreate(
+                ['slug' => Str::slug($product['name'])],
+                array_merge($product, [
+                    'category_id' => $categoryId,
+                ])
+            );
         }
     }
 
@@ -167,10 +176,12 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create(array_merge($product, [
-                'category_id' => $categoryId,
-                'slug' => Str::slug($product['name']),
-            ]));
+            Product::updateOrCreate(
+                ['slug' => Str::slug($product['name'])],
+                array_merge($product, [
+                    'category_id' => $categoryId,
+                ])
+            );
         }
     }
 }

@@ -20,6 +20,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Admin Routes
+use App\Http\Controllers\AdminController;
+use App\Http\Middleware\AdminMiddleware;
+
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+});
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/news.php';
 

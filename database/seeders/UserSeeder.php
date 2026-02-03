@@ -15,20 +15,23 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Tạo tài khoản admin
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('12345678'),
+                'role' => 'admin',
+            ]
+        );
 
         // Tạo tài khoản user thường
-        
-        User::create([
-            'name' => 'Regular User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'user',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Regular User',
+                'password' => Hash::make('12345678'),
+                'role' => 'user',
+            ]
+        );
     }
 }

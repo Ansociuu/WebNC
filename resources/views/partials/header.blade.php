@@ -84,6 +84,14 @@
                             <ul tabindex="0"
                                 class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 border border-slate-100">
                                 <li class="menu-title text-slate-400 px-4 py-2">{{Auth::user()->name}}</li>
+                                @if(Auth::user()->role === 'admin')
+                                <li>
+                                    <a href="{{ route('admin.dashboard') }}" class="py-3 text-indigo-600 font-bold">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                                        Quản trị hệ thống
+                                    </a>
+                                </li>
+                                @endif
                                 <li><a href="{{ route('profile.edit') }}" class="py-3">Hồ sơ cá nhân</a></li>
                                 <li>
                                     <form method="POST" action="{{route('logout')}}" class="w-full">

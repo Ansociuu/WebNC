@@ -32,28 +32,61 @@
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {{-- Sidebar --}}
         <aside class="lg:col-span-1 space-y-8">
-            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-                <h3 class="text-xl font-bold text-slate-900 mb-6 font-primary">Danh mục</h3>
-                <nav class="space-y-2">
-                    <a href="{{ route('shop.index') }}" class="flex items-center justify-between p-4 rounded-2xl {{ !request('category') ? 'bg-slate-900 text-white font-semibold shadow-lg shadow-slate-900/20' : 'text-slate-600 hover:bg-slate-50 transition-all font-medium' }}">
-                        <span>Tất cả sản phẩm</span>
-                    </a>
-                    @foreach($categories as $category)
-                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}" class="flex items-center justify-between p-4 rounded-2xl text-slate-600 hover:bg-slate-50 transition-all font-medium">
-                        <span>{{ $category->name }}</span>
-                        <span class="text-slate-400 text-sm">{{ $category->products_count }}</span>
-                    </a>
-                    @endforeach
-                </nav>
+            {{-- Primary Promo Banner --}}
+            <div class="rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 group relative">
+                <img src="{{ asset('images/promo-samsung.png') }}" alt="Samsung Promo" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                    <a href="{{ route('shop.index') }}" class="btn btn-primary w-full rounded-2xl border-none bg-white text-slate-900 hover:bg-indigo-600 hover:text-white font-black uppercase tracking-widest text-sm">Mua ngay</a>
+                </div>
             </div>
 
-            <div class="bg-indigo-600 rounded-3xl p-8 text-white relative overflow-hidden group shadow-xl shadow-indigo-200">
-                <div class="relative z-10 space-y-4">
-                    <h4 class="text-2xl font-bold leading-tight">Ưu đãi mùa hè <br> Giảm đến 50%</h4>
-                    <p class="text-indigo-100 text-sm">Chỉ áp dụng cho các dòng Laptop Gaming cao cấp.</p>
-                    <button class="btn btn-sm bg-white text-indigo-600 hover:bg-slate-100 border-none rounded-xl font-bold shadow-lg">Mua ngay</button>
+            {{-- Voucher Section --}}
+            <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket-percent"><path d="M2.5 17a2.5 2.5 0 1 1 5 0"/><path d="M21.5 17a2.5 2.5 0 1 0-5 0"/><path d="m11 11 3 3"/><path d="m11 14 3-3"/><path d="M2 12V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6"/><path d="M21.5 7h.5"/><path d="M21.5 17h.5"/><path d="M2 12a1 1 0 0 1 1-1h2.5a1 1 0 1 0 0-2H3a1 1 0 0 1-1-1V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1"/><path d="M2 12a1 1 0 0 0 1 1h2.5a1 1 0 1 1 0 2H3a1 1 0 0 0-1 1v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">Mã giảm giá</h3>
                 </div>
-                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+
+                <div class="space-y-4">
+                    {{-- Voucher Item --}}
+                    <div class="relative bg-indigo-50/50 rounded-2xl p-4 border border-dashed border-indigo-200 overflow-hidden group">
+                        <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full border border-indigo-100"></div>
+                        <div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full border border-indigo-100"></div>
+                        
+                        <div class="flex flex-col gap-1 items-center text-center">
+                            <span class="text-[10px] font-black text-indigo-400 uppercase tracking-widest leading-none mb-1">FREESHIP</span>
+                            <span class="text-lg font-black text-slate-900 leading-none">Miễn phí vận chuyển</span>
+                            <span class="text-[10px] text-slate-500 font-medium">Đơn tối thiểu 200K</span>
+                            <button class="mt-3 px-6 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition-colors shadow-lg shadow-indigo-100">Sao chép mã</button>
+                        </div>
+                    </div>
+
+                    {{-- Voucher Item 2 --}}
+                    <div class="relative bg-purple-50/50 rounded-2xl p-4 border border-dashed border-purple-200 overflow-hidden group">
+                        <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full border border-purple-100"></div>
+                        <div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full border border-purple-100"></div>
+                        
+                        <div class="flex flex-col gap-1 items-center text-center">
+                            <span class="text-[10px] font-black text-purple-400 uppercase tracking-widest leading-none mb-1">TECHNEW</span>
+                            <span class="text-lg font-black text-slate-900 leading-none">Giảm ngay 50.000₫</span>
+                            <span class="text-[10px] text-slate-500 font-medium">Đơn đầu tiên cho bạn mới</span>
+                            <button class="mt-3 px-6 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition-colors shadow-lg shadow-purple-100">Sao chép mã</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Secondary Small Banner --}}
+            <div class="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden group shadow-xl">
+                <div class="relative z-10 space-y-4">
+                    <span class="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em]">Sự kiện đặc biệt</span>
+                    <h4 class="text-2xl font-black leading-tight">Ngày hội <br> Apple 2026</h4>
+                    <p class="text-slate-400 text-xs font-medium leading-relaxed">Giảm thêm 5% cho học sinh - sinh viên khi mua iPad & MacBook.</p>
+                    <button class="btn btn-sm bg-indigo-600 text-white hover:bg-white hover:text-slate-900 border-none rounded-xl font-bold px-6 shadow-lg shadow-indigo-500/20">Khám phá</button>
+                </div>
+                <div class="absolute -right-20 -bottom-20 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
             </div>
         </aside>
 
