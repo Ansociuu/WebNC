@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+use App\Http\Controllers\HomeController;
+// ... (other imports)
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

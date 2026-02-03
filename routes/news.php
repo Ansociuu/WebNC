@@ -4,9 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 
-Route::get('/', function () {
-    return redirect()->route('news.index');
-})->name('home');
+
 
 Route::middleware(['auth', 'check.admin'])->group(function () {
     Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
