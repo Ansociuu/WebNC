@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 // Admin Routes
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\ChatController;
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
@@ -36,7 +37,16 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class);
+    
+    // Chat management
+    Route::get('/chats', [ChatController::class, 'adminIndex'])->name('chats.index');
+    Route::get('/chats/{conversationId}', [ChatController::class, 'adminShow'])->name('chats.show');
+    Route::post('/chats/{conversationId}/reply', [ChatController::class, 'adminReply'])->name('chats.reply');
 });
+
+// Chat API
+Route::post('/api/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+Route::get('/api/chat/{conversationId}', [ChatController::class, 'getConversation'])->name('chat.get');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/news.php';

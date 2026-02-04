@@ -33,6 +33,11 @@
     </main>
 
     @include('partials.footer')
+
+    <!-- Chat Widget -->
+    @include('components.chat-widget')
+    
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </body>
 
 </html>
