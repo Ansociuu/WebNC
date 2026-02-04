@@ -8,6 +8,8 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderSuccess;
 
 class CheckoutController extends Controller
 {
@@ -77,6 +79,13 @@ class CheckoutController extends Controller
             Cart::where('user_id', Auth::id())->delete();
 
             DB::commit();
+
+            // Gửi email thông báo đặt hàng thành công
+            try {
+                Mail::to($order->email)->send(new OrderSuccess($order));
+            } catch (\Exception $e) {
+                \Log::error('Lỗi gửi mail đặt hàng: ' . $e->getMessage());
+            }
 
             return redirect()->route('checkout.success', $order->id);
 
