@@ -81,4 +81,15 @@ Tất cả các đường dẫn được quản lý tập trung trong thư mục
 ---
 
 ### 5. Kết luận
-Dự án **TechStore** đã đáp ứng đầy đủ các yêu cầu của một ứng dụng web nâng cao. Việc sử dụng Laravel giúp hệ thống có tính bảo mật cao, dễ dàng bảo trì và mở rộng trong tương lai. Giao diện được thiết kế theo xu hướng hiện đại, mang lại trải nghiệm tốt nhất cho người dùng.
+Dự án **TechStore** đã đáp ứng đầy đủ các yêu cầu của một ứng dụng web thương mại điện tử nâng cao. Hệ thống bao gồm:
+
+*   **Frontend:** Giao diện thân thiện cho khách hàng (Shop, Cart, Checkout, News)
+*   **Backend:** API xử lý logic nghiệp vụ (Orders, Users, Products)
+*   **Admin Panel:** Bộ công cụ quản lý toàn diện cho quản trị viên
+
+Việc sử dụng Laravel cùng Tailwind CSS & DaisyUI giúp hệ thống có tính bảo mật cao, dễ dàng bảo trì, mở rộng, và mang lại trải nghiệm tốt nhất cho cả người dùng và quản trị viên. Tất cả các chức năng core đã được hoàn thiện theo yêu cầu.
+
+---
+
+### 6. Hướng dẫn chi tiết
+Xem file **[ADMIN_GUIDE.md](ADMIN_GUIDE.md)** để có hướng dẫn chi tiết về cách sử dụng Admin Panel.

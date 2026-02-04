@@ -6,9 +6,11 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 // ... (other imports)
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
