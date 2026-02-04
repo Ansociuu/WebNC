@@ -39,6 +39,8 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
             $validated['image'] = $path;
+        } elseif ($request->filled('image_url')) {
+            $validated['image'] = $request->image_url;
         }
 
         Product::create($validated);
@@ -66,12 +68,18 @@ class ProductController extends Controller
         $validated['slug'] = Str::slug($request->name);
 
         if ($request->hasFile('image')) {
-            // Delete old image
-            if ($product->image && Storage::disk('public')->exists($product->image)) {
+            // Delete old local image if exists
+            if ($product->image && !str_starts_with($product->image, 'http') && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
             $path = $request->file('image')->store('products', 'public');
             $validated['image'] = $path;
+        } elseif ($request->filled('image_url')) {
+            // Delete old local image if switching to URL
+            if ($product->image && !str_starts_with($product->image, 'http') && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $validated['image'] = $request->image_url;
         }
 
         $product->update($validated);
