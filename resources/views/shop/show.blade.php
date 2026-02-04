@@ -14,7 +14,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 mb-20">
         {{-- Product Image --}}
         <div class="relative bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 aspect-square">
-            <img src="https://picsum.photos/seed/{{ $product->id }}/800/800" alt="{{ $product->name }}"
+            <img src="{{ $product->image ? (str_starts_with($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://images.unsplash.com/photo-1517336712461-481bf488d78a?w=800&h=800&fit=crop' }}" 
+                alt="{{ $product->name }}"
                 class="w-full h-full object-cover">
         </div>
 
@@ -80,8 +81,11 @@
                 @foreach($relatedProducts as $related)
                     <a href="{{ route('shop.show', $related->slug) }}"
                         class="card bg-base-100 border border-slate-100 hover:shadow-lg transition-all duration-300">
-                        <figure class="aspect-square bg-slate-50"><img src="https://picsum.photos/seed/{{ $related->id }}/300/300"
-                                alt="{{ $related->name }}" class="object-cover w-full h-full" /></figure>
+                        <figure class="aspect-square bg-slate-50">
+                            <img src="{{ $related->image ? (str_starts_with($related->image, 'http') ? $related->image : asset('storage/' . $related->image)) : 'https://images.unsplash.com/photo-1517336712461-481bf488d78a?w=300&h=300&fit=crop' }}"
+                                 alt="{{ $related->name }}" 
+                                 class="object-cover w-full h-full" />
+                        </figure>
                         <div class="card-body p-4">
                             <h4 class="font-bold text-slate-800 line-clamp-2 min-h-[3rem]">{{ $related->name }}</h4>
                             <div class="text-primary font-bold mt-2">{{ number_format($related->price, 0, ',', '.') }}₫</div>

@@ -47,7 +47,8 @@
                         class="card bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
                         <figure class="relative aspect-square overflow-hidden bg-slate-100">
                             <a href="{{ route('shop.show', $product->slug) }}">
-                                <img src="https://picsum.photos/seed/{{ $product->id }}/500/500" alt="{{ $product->name }}"
+                                <img src="{{ $product->image ? (str_starts_with($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://images.unsplash.com/photo-1517336712461-481bf488d78a?w=400&h=400&fit=crop' }}" 
+                                    alt="{{ $product->name }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             </a>
                             @if(!$product->stock)
