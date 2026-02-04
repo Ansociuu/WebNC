@@ -33,9 +33,21 @@
 *   **Chi tiết bài viết:** Người dùng có thể đọc nội dung chi tiết.
 *   **Bình luận (Comments):** Cho phép người dùng tương tác, để lại ý kiến dưới các bài viết.
 
-#### 2.5. Quản trị hệ thống (Admin Panel) - Dự kiến/Mở rộng
-*   Quản lý danh mục, sản phẩm và đơn hàng.
-*   Thống kê doanh thu và quản lý người dùng.
+#### 2.5. Hệ thống Chat Hỗ trợ (Live Chat)
+*   **Widget Chat:** Tích hợp ở mọi trang, cho phép khách hàng bắt đầu cuộc trò chuyện ngay cả khi chưa đăng nhập.
+*   **Bot tự động:** Có khả năng trả lời các câu hỏi thường gặp (giờ mở cửa, phí ship, bảo hành) ngay lập tức.
+*   **Quản trị Chat:** Admin có trang riêng để quản lý các cuộc hội thoại và phản hồi khách hàng trong thời gian thực.
+
+#### 2.6. Lịch sử đơn hàng (Order History)
+*   **Quản lý giao dịch:** Người dùng có thể xem lại toàn bộ các đơn hàng đã đặt, trạng thái (Chờ xử lý, Đã thanh toán, Đã hủy).
+*   **Chi tiết đơn hàng:** Xem lại danh sách sản phẩm, địa chỉ nhận hàng và tổng tiền cho từng giao dịch cũ.
+
+#### 2.7. Quản trị hệ thống Toàn diện (Admin Panel)
+Hệ thống Admin đã được hoàn thiện đầy đủ các module:
+*   **Sản phẩm:** Quản lý kho, giá cả, và hỗ trợ gán linh hoạt cả **Upload ảnh** lẫn **Dán URL ảnh** từ bên ngoài.
+*   **Đơn hàng:** Theo dõi và cập nhật trạng thái đơn hàng của khách.
+*   **Thành viên & Tin tức:** Quản trị nội dung và người dùng hệ thống.
+*   **Hỗ trợ:** Phản hồi tin nhắn chat từ khách hàng.
 
 ---
 
@@ -45,7 +57,8 @@
 Hệ thống tuân thủ nghiêm ngặt mô hình MVC của Laravel:
 *   **Models:** `User.php`, `Product.php`, `Category.php`, `Order.php`, `News.php`... Định nghĩa các bảng và mối quan hệ (ví dụ: Một Order có nhiều OrderItems).
 *   **Views:** Sử dụng `Blade Engine` để tách biệt logic và giao diện. Tích hợp Tailwind CSS để tạo UI cao cấp.
-*   **Controllers:** Xử lý logic nghiệp vụ. Ví dụ: `CartController` xử lý logic thêm/sửa/xóa giỏ hàng trong session hoặc database.
+*   **Controllers:** Xử lý logic nghiệp vụ. Ví dụ: `CartController` xử lý logic thêm/sửa/xóa giỏ hàng. Hỗ trợ **AJAX Cart** để người dùng thêm vào giỏ mà không bị tải lại trang.
+*   **Khác:** Tích hợp hệ thống Email (OrderSuccess), xử lý ảnh linh hoạt (Local/Cloud).
 
 #### 3.2. Quản lý Cơ sở dữ liệu
 *   Sử dụng **Migrations** để thiết lập cấu trúc bảng đồng bộ.
@@ -158,5 +171,7 @@ Việc dùng Migration giúp nhóm phát triển đồng bộ database dễ dàn
 
 ---
 
+---
+
 ### 6. Kết luận
-Dự án **TechStore** đã đáp ứng đầy đủ các yêu cầu của một ứng dụng web nâng cao. Việc sử dụng Laravel giúp hệ thống có tính bảo mật cao, dễ dàng bảo trì và mở rộng trong tương lai. Giao diện được thiết kế theo xu hướng hiện đại, mang lại trải nghiệm tốt nhất cho người dùng.
+Dự án **TechStore** đã đáp ứng đầy đủ và vượt mong đợi các yêu cầu của một ứng dụng web nâng cao. Việc sử dụng Laravel giúp hệ thống có tính bảo mật cao, dễ dàng bảo trì. Các tính năng như AJAX Cart, ChatBot, và hỗ trợ ảnh URL giúp dự án mang tính thực tiễn cao, sẵn sàng cho việc triển khai thực tế.

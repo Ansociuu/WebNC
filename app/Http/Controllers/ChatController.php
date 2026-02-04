@@ -9,15 +9,44 @@ use Illuminate\Support\Facades\Auth;
 class ChatController extends Controller
 {
     // Chatbot tự động trả lời
+    // Chatbot tự động trả lời với bộ từ khóa phong phú hơn
     private $botResponses = [
-        'giờ mở cửa' => 'TechStore mở cửa từ 8:00 đến 22:00 hàng ngày, kể cả ngày lễ.',
-        'shipping' => 'Chúng tôi giao hàng toàn quốc trong 2-5 ngày làm việc. Miễn phí vận chuyển cho đơn từ 1,000,000₫.',
-        'bảo hành' => 'Tất cả sản phẩm đều được bảo hành 12 tháng từ ngày mua. Vui lòng giữ hóa đơn để nhận bảo hành.',
-        'đổi trả' => 'Chúng tôi cung cấp chính sách đổi trả trong 30 ngày nếu sản phẩm lỗi hoặc không đúng mô tả.',
-        'thanh toán' => 'Chúng tôi hỗ trợ nhiều phương thức: thẻ tín dụng, ví điện tử, chuyển khoản, và COD.',
-        'giá' => 'Bạn có thể xem giá chi tiết trên trang sản phẩm. Chúng tôi có các ưu đãi đặc biệt hàng tuần.',
-        'sản phẩm mới' => 'Chúng tôi cập nhật sản phẩm mới hàng tuần. Vui lòng kiểm tra trang Shop để xem những gì mới nhất.',
-        'liên hệ' => 'Bạn có thể liên hệ chúng tôi qua điện thoại: (84) 123 456 7890 hoặc email: support@techstore.vn',
+        'chào hỏi' => [
+            'keywords' => ['chào', 'hello', 'hi', 'xin chào', 'hey'],
+            'response' => 'Xin chào! TechStore có thể giúp gì cho bạn hôm nay?'
+        ],
+        'giờ mở cửa' => [
+            'keywords' => ['giờ', 'mở cửa', 'đóng cửa', 'thời gian', 'mấy giờ'],
+            'response' => 'TechStore mở cửa từ 8:00 đến 22:00 hàng ngày, kể cả ngày lễ và Chủ Nhật bạn nhé.'
+        ],
+        'vận chuyển' => [
+            'keywords' => ['ship', 'vận chuyển', 'giao hàng', 'bao lâu', 'phí'],
+            'response' => 'Chúng tôi giao hàng toàn quốc. Miễn phí vận chuyển cho đơn từ 1.000.000₫. Thời gian nhận hàng từ 2-5 ngày làm việc.'
+        ],
+        'bảo hành' => [
+            'keywords' => ['bảo hành', 'sửa chữa', 'hỏng', 'lỗi'],
+            'response' => 'Tất cả sản phẩm tại TechStore đều được bảo hành chính hãng 12-24 tháng. Bạn chỉ cần mang hóa đơn hoặc số điện thoại mua hàng đến shop.'
+        ],
+        'đổi trả' => [
+            'keywords' => ['đổi trả', 'hoàn tiền', 'không thích', 'trả hàng'],
+            'response' => 'Bạn có thể đổi trả sản phẩm trong vòng 30 ngày nếu còn nguyên seal, hộp và không có dấu hiệu va chạm vật lý.'
+        ],
+        'thanh toán' => [
+            'keywords' => ['thanh toán', 'trả tiền', 'chuyển khoản', 'cod', 'thẻ'],
+            'response' => 'Chúng tôi hỗ trợ: Tiền mặt (COD), Chuyển khoản ngân hàng, Ví MoMo, VNPay và thẻ tín dụng.'
+        ],
+        'giá cả' => [
+            'keywords' => ['giá', 'bao nhiêu', 'nhiêu tiền', 'rẻ'],
+            'response' => 'Giá sản phẩm luôn được cập nhật mới nhất trên website. TechStore cam kết giá cạnh tranh nhất thị trường.'
+        ],
+        'liên hệ' => [
+            'keywords' => ['liên hệ', 'số điện thoại', 'tổng đài', 'hotline', 'địa chỉ'],
+            'response' => 'Hotline: (84) 123 456 7890. Địa chỉ: 123 Đường Công Nghệ, TP. Hồ Chí Minh. Email: support@techstore.vn'
+        ],
+        'tạm biệt' => [
+            'keywords' => ['tạm biệt', 'bye', 'cảm ơn', 'thanks', 'ok'],
+            'response' => 'Rất vui được hỗ trợ bạn! Chúc bạn một ngày tốt lành. Đừng quên quay lại TechStore nhé!'
+        ],
     ];
 
     public function sendMessage(Request $request)
@@ -86,16 +115,19 @@ class ChatController extends Controller
 
     private function getBotResponse($message)
     {
-        $message = strtolower($message);
+        $message = mb_strtolower($message, 'UTF-8');
 
-        foreach ($this->botResponses as $keyword => $response) {
-            if (strpos($message, $keyword) !== false) {
-                return $response;
+        foreach ($this->botResponses as $category => $data) {
+            foreach ($data['keywords'] as $keyword) {
+                // Sử dụng mb_strpos để hỗ trợ tiếng Việt có dấu tốt hơn
+                if (mb_strpos($message, mb_strtolower($keyword, 'UTF-8')) !== false) {
+                    return $data['response'];
+                }
             }
         }
 
-        // Nếu không khớp với từ khóa nào, trả về câu trả lời mặc định
-        return 'Cảm ơn bạn đã liên hệ TechStore. Tin nhắn của bạn đã được ghi nhận. Đội hỗ trợ của chúng tôi sẽ trả lời bạn trong soonest. Bạn cũng có thể gọi (84) 123 456 7890 để được hỗ trợ nhanh hơn.';
+        // Nếu không khớp với từ khóa nào, trả về câu trả lời mặc định thông minh hơn
+        return 'Cảm ơn bạn đã quan tâm đến TechStore. Rất tiếc hiện tại tôi chưa hiểu ý bạn. Tuy nhiên, tin nhắn của bạn đã được chuyển đến nhân viên hỗ trợ, chúng tôi sẽ trả lời bạn sớm nhất có thể! Bạn cũng có thể gọi Hotline (84) 123 456 7890 để được giúp đỡ ngay.';
     }
 
     public function adminIndex()
