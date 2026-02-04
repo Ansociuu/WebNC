@@ -116,7 +116,7 @@
                         <p class="text-indigo-100 font-medium">Hàng Chính Hãng</p>
                     </div>
                     <div>
-                        <div class="text-5xl font-black mb-2">63</div>
+                        <div class="text-5xl font-black mb-2">34</div>
                         <p class="text-indigo-100 font-medium">Tỉnh Thành Phố</p>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
 
                     <div class="flex gap-6">
                         <div class="flex flex-col items-center">
-                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg">2017</div>
+                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg">2018</div>
                             <div class="w-1 h-20 bg-indigo-200 my-2"></div>
                         </div>
                         <div class="pb-8">
@@ -154,7 +154,7 @@
 
                     <div class="flex gap-6">
                         <div class="flex flex-col items-center">
-                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg">2020</div>
+                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg">2022</div>
                             <div class="w-1 h-20 bg-indigo-200 my-2"></div>
                         </div>
                         <div class="pb-8">
@@ -165,7 +165,7 @@
 
                     <div class="flex gap-6">
                         <div class="flex flex-col items-center">
-                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg">2024</div>
+                            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg">2026</div>
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold text-slate-900">Hiện Tại</h3>
