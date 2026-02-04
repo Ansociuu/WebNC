@@ -51,32 +51,19 @@ class ChatController extends Controller
 
     public function sendMessage(Request $request)
     {
-        // Validate only message server-side; name/email can be derived from authenticated user
         $request->validate([
             'message' => 'required|string|min:1',
         ]);
 
-        $name = $request->input('name');
-        $email = $request->input('email');
-
-        // If the user is authenticated, prefer server-side values
-        if (Auth::check()) {
-            $user = Auth::user();
-            if (empty($name)) $name = $user->name;
-            if (empty($email)) $email = $user->email;
-        }
-
-        if (empty($name) || empty($email)) {
-            return response()->json(['success' => false, 'error' => 'Name and email are required.'], 422);
-        }
-
-        $conversationId = Chat::generateConversationId($email);
+        $user = Auth::user();
+        $conversationId = Chat::generateConversationId($user->email);
 
         // Lưu tin nhắn từ người dùng
         Chat::create([
+            'user_id' => $user->id,
             'conversation_id' => $conversationId,
-            'name' => $name,
-            'email' => $email,
+            'name' => $user->name,
+            'email' => $user->email,
             'message' => $request->input('message'),
             'sender_type' => 'user',
             'status' => 'pending',
@@ -87,9 +74,10 @@ class ChatController extends Controller
 
         if ($botReply) {
             Chat::create([
+                'user_id' => $user->id,
                 'conversation_id' => $conversationId,
                 'name' => 'TechStore Bot',
-                'email' => $email,
+                'email' => $user->email,
                 'message' => $botReply,
                 'sender_type' => 'bot',
                 'status' => 'answered',
@@ -104,9 +92,9 @@ class ChatController extends Controller
         ]);
     }
 
-    public function getConversation($conversationId)
+    public function getConversation()
     {
-        $messages = Chat::where('conversation_id', $conversationId)
+        $messages = Chat::where('user_id', Auth::id())
             ->orderBy('created_at', 'asc')
             ->get();
 
@@ -132,18 +120,18 @@ class ChatController extends Controller
 
     public function adminIndex()
     {
-        $conversations = Chat::selectRaw('conversation_id, email, name, MAX(created_at) as last_message_time')
-            ->where('sender_type', 'user')
-            ->groupBy('conversation_id', 'email', 'name')
+        $conversations = Chat::selectRaw('user_id, email, name, MAX(created_at) as last_message_time')
+            ->whereNotNull('user_id')
+            ->groupBy('user_id', 'email', 'name')
             ->orderBy('last_message_time', 'desc')
             ->paginate(20);
 
         return view('admin.chats.index', compact('conversations'));
     }
 
-    public function adminShow($conversationId)
+    public function adminShow($userId)
     {
-        $messages = Chat::where('conversation_id', $conversationId)
+        $messages = Chat::where('user_id', $userId)
             ->orderBy('created_at', 'asc')
             ->get();
 
@@ -153,16 +141,16 @@ class ChatController extends Controller
             abort(404);
         }
 
-        return view('admin.chats.show', compact('messages', 'conversationId', 'conversation'));
+        return view('admin.chats.show', compact('messages', 'userId', 'conversation'));
     }
 
-    public function adminReply(Request $request, $conversationId)
+    public function adminReply(Request $request, $userId)
     {
         $validated = $request->validate([
             'message' => 'required|string|min:1',
         ]);
 
-        $lastMessage = Chat::where('conversation_id', $conversationId)
+        $lastMessage = Chat::where('user_id', $userId)
             ->where('sender_type', 'user')
             ->latest()
             ->first();
@@ -172,7 +160,8 @@ class ChatController extends Controller
         }
 
         Chat::create([
-            'conversation_id' => $conversationId,
+            'user_id' => $userId,
+            'conversation_id' => $lastMessage->conversation_id,
             'name' => 'Admin',
             'email' => $lastMessage->email,
             'message' => $validated['message'],
@@ -181,7 +170,7 @@ class ChatController extends Controller
         ]);
 
         // Cập nhật trạng thái cuộc trò chuyện thành 'answered'
-        Chat::where('conversation_id', $conversationId)
+        Chat::where('user_id', $userId)
             ->where('sender_type', 'user')
             ->update(['status' => 'answered']);
 

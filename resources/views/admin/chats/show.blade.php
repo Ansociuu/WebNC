@@ -39,7 +39,7 @@
     <!-- Reply Form -->
     <div class="bg-white rounded-lg shadow-sm border border-slate-100 p-6">
         <h3 class="font-bold text-lg mb-4">Trả lời khách hàng</h3>
-        <form action="{{ route('admin.chats.reply', $conversationId) }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.chats.reply', $userId) }}" method="POST" class="space-y-4">
             @csrf
             <div>
                 <textarea name="message" rows="4" class="textarea textarea-bordered w-full" placeholder="Nhập tin nhắn trả lời..." required></textarea>

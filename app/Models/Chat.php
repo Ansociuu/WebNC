@@ -10,6 +10,7 @@ class Chat extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'conversation_id',
         'name',
         'email',
@@ -18,6 +19,11 @@ class Chat extends Model
         'status',
         'is_automated',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public static function generateConversationId($email)
     {
