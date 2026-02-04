@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\News;
 use App\Models\Category;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,11 +21,14 @@ class AdminController extends Controller
             'products_count' => Product::count(),
             'news_count' => News::count(),
             'categories_count' => Category::count(),
+            'orders_count' => Order::count(),
+            'revenue' => Order::where('status', 'completed')->sum('total_price'),
         ];
 
         $latest_users = User::latest()->take(5)->get();
         $latest_products = Product::with('category')->latest()->take(5)->get();
+        $latest_orders = Order::with('user')->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'latest_users', 'latest_products'));
+        return view('admin.dashboard', compact('stats', 'latest_users', 'latest_products', 'latest_orders'));
     }
 }

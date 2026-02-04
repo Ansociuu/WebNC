@@ -1,9 +1,8 @@
-@extends('layouts.myapp')
+@extends('layouts.admin')
 
 @section('title', 'Chi tiết đơn hàng')
 
-@section('content')
-<div class="p-8">
+@section('admin_content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold">Đơn hàng #{{ $order->id }}</h1>
         <a href="{{ route('admin.orders.index') }}" class="text-indigo-600 font-bold">Quay về danh sách</a>
@@ -44,5 +43,4 @@
             <button class="btn btn-primary">Cập nhật</button>
         </form>
     </div>
-</div>
 @endsection

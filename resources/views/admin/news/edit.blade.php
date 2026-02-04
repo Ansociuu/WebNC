@@ -1,9 +1,8 @@
-@extends('layouts.myapp')
+@extends('layouts.admin')
 
 @section('title', 'Sửa tin tức')
 
-@section('content')
-<div class="p-8">
+@section('admin_content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold">Sửa tin tức</h1>
         <a href="{{ route('admin.news.index') }}" class="text-indigo-600 font-bold">Quay về danh sách</a>
@@ -24,5 +23,4 @@
             <button class="btn btn-primary">Cập nhật</button>
         </div>
     </form>
-</div>
 @endsection

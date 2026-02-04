@@ -1,12 +1,11 @@
-@extends('layouts.myapp')
+@extends('layouts.admin')
 
 @section('title', 'Quản lý sản phẩm - TechStore')
 
-@section('content')
-<div class="max-w-7xl mx-auto space-y-8">
+@section('admin_content')
     <div class="flex justify-between items-center">
         <div>
-            <h1 class="text-4xl font-black text-slate-900 tracking-tight text-white mb-2">Danh sách sản phẩm</h1>
+            <h1 class="text-4xl font-black text-slate-900 tracking-tight mb-2">Danh sách sản phẩm</h1>
             <p class="text-slate-500 font-medium">Quản lý kho hàng và thông tin sản phẩm của TechStore.</p>
         </div>
         <a href="{{ route('admin.products.create') }}" class="btn btn-primary rounded-[1.5rem] px-8 h-14 font-black shadow-lg shadow-primary/25 border-none">
@@ -81,5 +80,4 @@
             {{ $products->links() }}
         </div>
     </div>
-</div>
 @endsection

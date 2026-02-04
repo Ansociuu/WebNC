@@ -1,17 +1,13 @@
-@extends('layouts.myapp')
+@extends('layouts.admin')
 
 @section('title', 'Chỉnh sửa sản phẩm - TechStore')
 
-@section('content')
-<div class="max-w-4xl mx-auto">
+@section('admin_content')
     <div class="mb-8">
-        <div class="flex items-center gap-4 mb-4 text-sm font-bold">
-            <a href="{{ route('admin.dashboard') }}" class="text-slate-400 hover:text-indigo-600">Admin</a>
-            <span class="text-slate-300">/</span>
-            <a href="{{ route('admin.products.index') }}" class="text-slate-400 hover:text-indigo-600">Sản phẩm</a>
-            <span class="text-slate-300">/</span>
-            <span class="text-indigo-600">Chỉnh sửa</span>
-        </div>
+        <a href="{{ route('admin.products.index') }}" class="text-indigo-600 font-bold flex items-center gap-2 hover:underline mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            Quay lại danh sách
+        </a>
         <h1 class="text-4xl font-black text-slate-900 tracking-tight">Chỉnh sửa sản phẩm</h1>
     </div>
 
@@ -88,7 +84,6 @@
             <button type="submit" class="btn btn-primary h-14 px-12 rounded-2xl font-black bg-indigo-600 border-none shadow-xl shadow-indigo-100">Cập nhật sản phẩm</button>
         </div>
     </form>
-</div>
 
 <script>
     function previewImage(input) {

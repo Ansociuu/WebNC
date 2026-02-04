@@ -1,9 +1,8 @@
-@extends('layouts.myapp')
+@extends('layouts.admin')
 
 @section('title', 'Tạo danh mục')
 
-@section('content')
-<div class="p-8">
+@section('admin_content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold">Tạo danh mục</h1>
         <a href="{{ route('admin.categories.index') }}" class="text-indigo-600 font-bold">Quay về danh sách</a>
@@ -23,5 +22,4 @@
             <button class="btn btn-primary">Lưu</button>
         </div>
     </form>
-</div>
 @endsection
