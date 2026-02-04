@@ -39,7 +39,7 @@
         </div>
         <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-xs text-slate-500">
-                &copy; {{ date('Y') }} TechStore. All rights reserved. Thiết kế bởi <strong>Lê Phạm Thành Đạt - 23010541</strong>
+                &copy; {{ date('Y') }} TechStore. All rights reserved.
             </p>
             <div class="flex gap-4">
                 <a href="#" class="btn btn-ghost btn-xs btn-circle text-slate-400 hover:text-primary">
