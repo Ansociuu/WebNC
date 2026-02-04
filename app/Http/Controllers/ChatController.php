@@ -102,7 +102,7 @@ class ChatController extends Controller
     {
         $conversations = Chat::selectRaw('conversation_id, email, name, MAX(created_at) as last_message_time')
             ->where('sender_type', 'user')
-            ->groupBy('conversation_id')
+            ->groupBy('conversation_id', 'email', 'name')
             ->orderBy('last_message_time', 'desc')
             ->paginate(20);
 
