@@ -23,9 +23,9 @@
             <div>
                 <h4 class="text-white font-bold mb-6">Hỗ trợ khách hàng</h4>
                 <ul class="space-y-4 text-sm">
-                    <li><a href="#" class="hover:text-primary transition-colors text-slate-400">Trung tâm trợ giúp</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors text-slate-400">Chính sách bảo hành</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors text-slate-400">Vận chuyển & Giao nhận</a></li>
+                    <li><a href="{{route('support')}}" class="hover:text-primary transition-colors text-slate-400">Trung tâm trợ giúp</a></li>
+                    <li><a href="{{route('support')}}#policies" class="hover:text-primary transition-colors text-slate-400">Chính sách bảo hành</a></li>
+                    <li><a href="{{route('support')}}#contact" class="hover:text-primary transition-colors text-slate-400">Liên hệ chúng tôi</a></li>
                 </ul>
             </div>
             <div>

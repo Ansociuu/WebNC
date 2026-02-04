@@ -7,10 +7,12 @@ use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\SupportController;
 // ... (other imports)
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/support', [SupportController::class, 'index'])->name('support');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
