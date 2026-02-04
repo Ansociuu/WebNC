@@ -41,7 +41,7 @@ class ChatController extends Controller
         ],
         'liên hệ' => [
             'keywords' => ['liên hệ', 'số điện thoại', 'tổng đài', 'hotline', 'địa chỉ'],
-            'response' => 'Hotline: (84) 123 456 7890. Địa chỉ: 123 Đường Công Nghệ, TP. Hồ Chí Minh. Email: support@techstore.vn'
+            'response' => 'Hotline: (84) 123 456 7890. Địa chỉ: Phenikaa. Email: support@techstore.vn'
         ],
         'tạm biệt' => [
             'keywords' => ['tạm biệt', 'bye', 'cảm ơn', 'thanks', 'ok'],
