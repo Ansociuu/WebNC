@@ -33,7 +33,7 @@
 
             @if($product->stock > 0)
                 <form action="{{ route('cart.add', $product->id) }}" method="POST"
-                    class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-slate-100">
+                    class="ajax-cart-form flex flex-col sm:flex-row gap-4 pt-8 border-t border-slate-100">
                     @csrf
                     <div class="join border border-slate-200 rounded-lg">
                         <button type="button" class="join-item btn btn-ghost px-4"

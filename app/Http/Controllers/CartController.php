@@ -38,6 +38,15 @@ class CartController extends Controller
             ]);
         }
 
+        if ($request->ajax()) {
+            $cartCount = Cart::where('user_id', Auth::id())->sum('quantity');
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã thêm sản phẩm vào giỏ hàng',
+                'cartCount' => $cartCount
+            ]);
+        }
+
         return redirect()->route('cart.index')->with('success', 'Đã thêm sản phẩm vào giỏ hàng');
     }
 

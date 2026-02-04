@@ -68,7 +68,7 @@
                                 <span
                                     class="text-xl font-bold text-primary">{{ number_format($product->price, 0, ',', '.') }}₫</span>
                                 @if($product->stock > 0)
-                                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="ajax-cart-form">
                                         @csrf
                                         <button type="submit" class="btn btn-circle btn-primary btn-sm shadow-lg shadow-primary/30">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"

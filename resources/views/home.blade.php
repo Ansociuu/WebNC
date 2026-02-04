@@ -117,7 +117,7 @@
                             <div class="flex flex-col">
                                 <span class="text-2xl font-black text-indigo-600">{{ number_format($product->price, 0, ',', '.') }}₫</span>
                             </div>
-                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                            <form action="{{ route('cart.add', $product->id) }}" method="POST" class="ajax-cart-form">
                                 @csrf
                                 <button type="submit" class="p-4 bg-indigo-600 text-white rounded-[1.25rem] hover:bg-slate-900 shadow-lg shadow-indigo-100 hover:shadow-slate-200 transition-all duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
