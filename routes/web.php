@@ -27,6 +27,11 @@ use App\Http\Middleware\AdminMiddleware;
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    // Admin management for news and users
+    Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class);
 });
 
 require __DIR__ . '/auth.php';
