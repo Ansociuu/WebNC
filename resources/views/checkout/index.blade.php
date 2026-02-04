@@ -100,8 +100,9 @@
                         @foreach($cartItems as $item)
                             <div class="flex gap-3 mb-4 last:mb-0">
                                 <div class="avatar rounded-lg bg-slate-50 p-1 shrink-0">
-                                    <div class="w-12 h-12 rounded">
-                                        <img src="https://picsum.photos/seed/{{ $item->product->id }}/100/100" />
+                                    <div class="w-12 h-12 rounded overflow-hidden">
+                                        <img src="{{ $item->product->image ? (str_starts_with($item->product->image, 'http') ? $item->product->image : asset('storage/' . $item->product->image)) : 'https://images.unsplash.com/photo-1517336712461-481bf488d78a?w=100&h=100&fit=crop' }}" 
+                                            class="w-full h-full object-cover" />
                                     </div>
                                 </div>
                                 <div class="flex-1 min-w-0">

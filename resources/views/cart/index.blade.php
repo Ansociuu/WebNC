@@ -27,7 +27,7 @@
                                             <div class="flex items-center gap-4">
                                                 <div class="avatar rounded-xl bg-slate-100 p-1">
                                                     <div class="mask mask-squircle w-16 h-16">
-                                                        <img src="https://picsum.photos/seed/{{ $item->product->id }}/100/100"
+                                                        <img src="{{ $item->product->image ? (str_starts_with($item->product->image, 'http') ? $item->product->image : asset('storage/' . $item->product->image)) : 'https://images.unsplash.com/photo-1517336712461-481bf488d78a?w=100&h=100&fit=crop' }}"
                                                             alt="{{ $item->product->name }}" />
                                                     </div>
                                                 </div>
