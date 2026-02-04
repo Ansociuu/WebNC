@@ -84,7 +84,7 @@ class CheckoutController extends Controller
             try {
                 Mail::to($order->email)->send(new OrderSuccess($order));
             } catch (\Exception $e) {
-                \Log::error('Lỗi gửi mail đặt hàng: ' . $e->getMessage());
+                Log::error('Lỗi gửi mail đặt hàng: ' . $e->getMessage());
             }
 
             return redirect()->route('checkout.success', $order->id);

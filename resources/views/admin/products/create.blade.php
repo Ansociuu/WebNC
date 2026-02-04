@@ -69,7 +69,7 @@
                             </div>
                             <div>
                                 <p class="text-slate-900 font-bold">Chọn file ảnh</p>
-                                <p class="text-slate-400 text-xs font-medium uppercase mt-1">JPG, PNG, GIF (Max 2MB)</p>
+                                <p class="text-slate-400 text-xs font-medium uppercase mt-1">JPG, PNG, GIF (Max 10MB)</p>
                             </div>
                         </div>
                         <img id="upload-preview" src="" class="hidden w-full h-full object-cover rounded-2xl shadow-inner">
