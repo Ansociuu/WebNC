@@ -30,11 +30,11 @@
                     <td class="font-bold">{{ $conv->name }}</td>
                     <td class="text-slate-500">{{ $conv->email }}</td>
                     <td class="text-slate-600 text-sm truncate max-w-xs">
-                        {{ \App\Models\Chat::where('conversation_id', $conv->conversation_id)->where('sender_type', 'user')->latest()->first()->message ?? 'N/A' }}
+                        {{ \App\Models\Chat::where('user_id', $conv->user_id)->where('sender_type', 'user')->latest()->first()->message ?? 'N/A' }}
                     </td>
                     <td class="text-slate-500 text-sm">{{ \Carbon\Carbon::parse($conv->last_message_time)->format('Y-m-d H:i') }}</td>
                     <td>
-                        <a href="{{ route('admin.chats.show', $conv->conversation_id) }}" class="btn btn-ghost btn-sm">Trả lời</a>
+                        <a href="{{ route('admin.chats.show', $conv->user_id) }}" class="btn btn-ghost btn-sm">Trả lời</a>
                     </td>
                 </tr>
                 @empty

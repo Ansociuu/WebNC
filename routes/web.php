@@ -44,9 +44,11 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     Route::post('/chats/{conversationId}/reply', [ChatController::class, 'adminReply'])->name('chats.reply');
 });
 
-// Chat API
-Route::post('/api/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
-Route::get('/api/chat/{conversationId}', [ChatController::class, 'getConversation'])->name('chat.get');
+// Chat API - Now restricted to authenticated users
+Route::middleware('auth')->group(function () {
+    Route::post('/api/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::get('/api/chat/history', [ChatController::class, 'getConversation'])->name('chat.history');
+});
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/news.php';
