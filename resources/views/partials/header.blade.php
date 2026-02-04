@@ -93,6 +93,7 @@
                                 </li>
                                 @endif
                                 <li><a href="{{ route('profile.edit') }}" class="py-3">Hồ sơ cá nhân</a></li>
+                                <li><a href="{{ route('orders.index') }}" class="py-3">Lịch sử mua hàng</a></li>
                                 <li>
                                     <form method="POST" action="{{route('logout')}}" class="w-full">
                                         @csrf
